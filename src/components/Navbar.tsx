@@ -26,7 +26,7 @@ const Navbar = () => {
                 
                 <div className="d-flex">
                     <input
-                        className="form-control me-2 search-box"
+                        className="form-control search-box"
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
