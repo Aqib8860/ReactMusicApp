@@ -11,7 +11,7 @@ export type Song = {
 
 const fetch_all_songs = async (search:string):Promise<Song[]> => {
     let uri = `${import.meta.env.VITE_ITUNES_URL}?term=${search}&limit=25`
-
+    console.log("url ", uri)
     const response = await fetch(uri);
     const data = await response.json();//-
     
