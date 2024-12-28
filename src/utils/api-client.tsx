@@ -7,16 +7,16 @@ export type Song = {
     previewUrl: string;
     artworkUrl100: string;
 }
- 
 
-const fetch_all_songs = async (search:string):Promise<Song[]> => {
+const fetch_all_songs = async (search:string="Atif+Arijit"):Promise<Song[]> => {
     let uri = `${import.meta.env.VITE_ITUNES_URL}?term=${search}&limit=25`
     console.log("url ", uri)
     const response = await fetch(uri);
-    const data = await response.json();//-
-    
+
+    const data = await response.json();
+
     const  songs:Song[] = data.results;
-    
+
     const all_songs: Song[] = songs.map(s=>{
         // Destructructure the data
         const  {trackId, trackName, artistName, collectionName, previewUrl, artworkUrl100}:Song = s;

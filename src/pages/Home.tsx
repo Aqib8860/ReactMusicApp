@@ -4,24 +4,26 @@ import Songs from "../components/Songs";
 import fetch_all_songs, {Song} from "../utils/api-client";
 
 export const Home = () => {
-    const [search, setSearch] = useState("Atif+Aslam");
 
-    const [allsongs, setSongs] = useState<Song[]>([]); // State to store songs
+    const [allsongs, setSongs] = useState<Song[]>([]);
+    const [searchValue, setSearchValue] = useState<string>("Atif+Arijit");
 
-    const fetch_songs = async () => {
-        setSearch("Atif+Aslam");
-
-        const songs: Song[] = await fetch_all_songs(search);
-        setSongs(songs);
-    }
+    const fetch_songs = async (query:string) => {
+        const songs: Song[] = await fetch_all_songs(query);
+        if (songs) {
+            setSongs(songs);
+        } else {
+            <h1>No songs</h1>
+        }
+    };
 
     useEffect (() => {
-        fetch_songs();
-    }, [search]);
+        fetch_songs(searchValue);
+    }, [searchValue]);
 
     return(
         <div>
-            <Navbar />
+            <Navbar  setsearchValue={setSearchValue}/>
             <Songs songs={allsongs}/>
         </div>
 
